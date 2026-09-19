@@ -66,6 +66,21 @@ npm run dev -- run examples/checkout.recovery.yml \
   --out .secondchance/resilient-report.md
 ```
 
+### Author recovery contracts
+
+Turn workflow intent into reviewable contract-as-code, then test whether the contract itself is strong enough to trust:
+
+```bash
+npm run dev -- generate "User invites a teammate; invite sends exactly once; form survives reload" --out examples/invite.recovery.yml
+npm run dev -- lint examples/invite.recovery.yml --fix
+npm run dev -- compose examples/base.recovery.yml examples/email.recovery.yml --out examples/combined.recovery.yml
+npm run dev -- diff examples/base.recovery.yml examples/combined.recovery.yml
+npm run dev -- fuzz examples/checkout.recovery.yml --limit 50
+npm run dev -- coverage examples/checkout.recovery.yml
+```
+
+`generate` returns clarification questions when prose does not specify cardinality, interruption points, or authoritative backend evidence. It does not silently invent those guarantees.
+
 ## Recovery Contract
 
 ```yaml
