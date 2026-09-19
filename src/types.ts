@@ -37,6 +37,41 @@ export interface RecoveryContract {
   };
 }
 
+export type LintSeverity = "error" | "warning" | "info";
+
+export interface ContractDiagnostic {
+  rule: string;
+  severity: LintSeverity;
+  message: string;
+  path: string;
+  fix?: string;
+}
+
+export interface ContractCoverage {
+  totalWindows: number;
+  enabledWindows: number;
+  coveredFamilies: WindowFamily[];
+  missingFamilies: WindowFamily[];
+  score: number;
+  windows: Array<{ id: string; family: WindowFamily; status: "covered" | "disabled" }>;
+}
+
+export interface ContractChange {
+  kind: "added" | "removed" | "changed" | "weakened" | "strengthened";
+  path: string;
+  before?: unknown;
+  after?: unknown;
+  breaking: boolean;
+}
+
+export interface FuzzCase {
+  id: string;
+  windowId: string;
+  family: WindowFamily;
+  fault: "timeout" | "disconnect" | "duplicate" | "delay" | "restart";
+  timing: "before" | "during" | "after";
+}
+
 export interface Effect {
   id: string;
   runId: string;
