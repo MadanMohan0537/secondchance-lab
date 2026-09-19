@@ -1,0 +1,40 @@
+version: 1
+name: checkout-exactly-once
+description: A payment is charged and its order is created exactly once, even when acknowledgement is ambiguous.
+
+action:
+  name: submit-payment
+  idempotencyKey: checkout-session-id
+
+windows:
+  - id: duplicate_click
+    family: request
+    description: The customer submits again before the first attempt resolves.
+  - id: after_send_before_ack
+    family: request
+    description: The request leaves the client but no acknowledgement arrives.
+  - id: after_commit_before_response
+    family: request
+    description: The provider commits the charge but the response is lost.
+  - id: refresh_during_processing
+    family: session
+    description: The customer refreshes while the payment is unresolved.
+
+invariants:
+  effects:
+    - effect: charge.succeeded
+      exactly: 1
+    - effect: order.created
+      exactly: 1
+  state:
+    - path: backend.paymentStatus
+      operator: equals
+      value: paid
+    - path: visible.paymentStatus
+      operator: equals
+      value: paid
+
+failureBudget:
+  safetyViolations: 0
+  recoverySuccessRate: 1
+  outcomeCertaintyRate: 1
