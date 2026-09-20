@@ -43,10 +43,25 @@ This repository contains an executable backend-first foundation, not a landing-p
 | Concurrent interruption sweeps | Implemented |
 | Markdown evidence reports | Implemented |
 | Vulnerable and resilient checkout simulations | Implemented |
-| Browser, webhook, queue, mobile, and agent adapters | Planned |
-| Hosted replay dashboard and integrations | Planned |
+| API fault injection and provider mocking | Implemented core |
+| Webhook ordering, deduplication, and buffering | Implemented core |
+| Background-job retries and dead-letter behavior | Implemented core |
+| Time-travel snapshots and causal state graphs | Implemented core |
+| Runtime matrices, interrupted load, and offline reconciliation | Implemented core |
+| Recovery SLOs, regression bisect, environment drift, and orphan detection | Implemented core |
+| Replay storage, PR reports, badges, postmortems, and digests | Implemented core |
+| Feature-flag plans, recovery playbooks, and incident-to-contract conversion | Implemented core |
+| Multi-actor, agent-tool, and state-machine verification | Implemented core |
+| TLA+ export, recovery debt, deploy gates, benchmark, digital twin, and Recovery API | Implemented core |
+| Credentialed Stripe/Auth0/SendGrid/Sentry/Datadog adapters | Integration boundary |
+| Real Playwright browsers and React Native/Flutter device farms | Integration boundary |
+| Hosted dashboard, marketplace, Slack/Teams apps, and public service | Deployment boundary |
 
 The project deliberately distinguishes implemented behavior from roadmap intent. See the [complete product roadmap](docs/roadmap.md).
+
+### What “implemented core” means
+
+An implemented core has a typed API, deterministic behavior, automated tests, and exports through the package entry point. An integration boundary requires a real vendor account, browser/device runtime, hosted database, or deployment environment and is not represented as complete merely because an interface exists.
 
 ## How it works
 
@@ -275,6 +290,14 @@ docs/architecture.md    system boundaries and design decisions
 docs/roadmap.md         phased platform roadmap
 .github/workflows/      CI verification
 ```
+
+Key modules include:
+
+- `analysis.ts`: SLOs, score comparison, regression bisect, environment drift, orphan detection, certainty, and effort;
+- `collaboration.ts`: replay storage, PR output, badges, postmortems, and digests;
+- `integrations.ts`: feature-flag plans, provider mocks, component contracts, playbooks, and incident conversion;
+- `advanced.ts`: multi-actor analysis, agent-tool verification, state-machine contracts, personas, and TLA+ export;
+- `platform.ts`: recovery debt, deploy gates, benchmarking, journey twins, pattern mining, and Recovery API queries.
 
 ## Development
 
