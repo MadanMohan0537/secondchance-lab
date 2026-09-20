@@ -19,3 +19,8 @@ export * from "./events.js";
 export * from "./jobs.js";
 export * from "./load.js";
 export * from "./offline.js";
+export * from "./analysis.js";
+export * from "./collaboration.js";
+export * from "./integrations.js";
+export * from "./advanced.js";
+export * from "./platform.js";
