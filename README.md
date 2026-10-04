@@ -23,6 +23,18 @@ SecondChance Lab defines the required recovery behavior as code, injects interru
 
 > The explorer may be intelligent. The verifier must be deterministic.
 
+## Run the demo, then challenge its assumptions
+
+```bash
+npm install
+npm run check
+npm run demo
+```
+
+Read the generated report alongside the recovery contract. The included adapters demonstrate interruption and recovery behavior through simulations; they do not establish exactly-once effects in your live payment or backend system.
+
+Before building a real adapter, define how it observes committed effects, reuses idempotency keys and distinguishes a pending request from a completed one. Start with [example contracts](examples/), [CLI implementation](src/cli.ts), [contribution guidance](CONTRIBUTING.md) and [security boundaries](SECURITY.md).
+
 ## What is working today
 
 This repository contains an executable backend-first foundation, not a landing-page prototype.
